@@ -431,6 +431,12 @@ void UnitClass::AI(void)
 		Strength++;
 		Mark(MARK_CHANGE);
 	}
+
+	if ((*this == UNIT_STANK || *this == UNIT_FTANK) && (Frame % 16) == 0 && Health_Ratio() < 0x0100) {
+		Strength++;
+		Mark(MARK_CHANGE);
+	}
+
 	if (*this == UNIT_VICE && Map[Coord_Cell(Coord)].Land_Type() == LAND_TIBERIUM && Health_Ratio() < 0x0100 && (Frame % 16) == 0) {
 		Strength++;
 		Mark(MARK_CHANGE);

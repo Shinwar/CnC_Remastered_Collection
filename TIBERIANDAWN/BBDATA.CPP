@@ -477,6 +477,51 @@ static BulletTypeClass const ClassTRexBite(
 	ANIM_NONE					// Explosion to use upon impact.
 );
 
+static BulletTypeClass const ClassFAE(
+	BULLET_FAE,
+	"DRAGON",					// NAME:			Text name of this unit type.
+	true,						// Flies over tall walls?
+	true,						// Homes in on target?
+	false,					// Projectile arcs to the target?
+	false,					// Is this a dropping bomb-like object?
+	false,					// Is this projectile invisible?
+	true,						// Will it blow up even if it gets just NEAR to target?
+	true,						// Does it have flickering flame animation?
+	true,						// Can it run out of fuel?
+	false,					// Is there no visual difference between projectile facings?
+	false,					// Is projectile inherently inaccurate?
+	true,						// Translucent colors are used?
+	true,						// Good against aircraft?
+	3,								// ARMING:		Time to arm projectile after launch.
+	0,								// RANGE:		Inherent override range factor.
+	MPH_ROCKET,					// SPEED:		Miles per hour.
+	5,								// ROT:			Rate of turn (degrees per tick).
+	WARHEAD_FIRE,					// WARHEAD:		If fires weapon, warhead type
+	ANIM_NAPALM3				// Explosion to use upon impact.
+);
+
+static BulletTypeClass const ClassHellfire(
+	BULLET_HELLFIRE,
+	"DRAGON",					// NAME:			Text name of this unit type.
+	true,						// Flies over tall walls?
+	true,						// Homes in on target?
+	false,					// Projectile arcs to the target?
+	false,					// Is this a dropping bomb-like object?
+	false,					// Is this projectile invisible?
+	true,						// Will it blow up even if it gets just NEAR to target?
+	true,						// Does it have flickering flame animation?
+	true,						// Can it run out of fuel?
+	false,					// Is there no visual difference between projectile facings?
+	false,						// Is projectile inherently inaccurate?
+	true,						// Translucent colors are used?
+	true,						// Good against aircraft?
+	3,								// ARMING:		Time to arm projectile after launch.
+	0,								// RANGE:		Inherent override range factor.
+	MPH_ROCKET,					// SPEED:		Miles per hour.
+	7,								// ROT:			Rate of turn (degrees per tick).
+	WARHEAD_HE,					// WARHEAD:		If fires weapon, warhead type
+	ANIM_FRAG1					// Explosion to use upon impact.
+);
 
 #ifdef PETROGLYPH_EXAMPLE_MOD
 
@@ -530,6 +575,8 @@ BulletTypeClass const * const BulletTypeClass::Pointers[BULLET_COUNT] = {
 	&ClassSpreadfire,	// BULLET_SPREADFIRE
 	&ClassHeadButt,	// BULLET_HEADBUTT
 	&ClassTRexBite,	// BULLET_TREXBITE
+	&ClassFAE,		//BULLET_FAE
+	&ClassHellfire,	//BULLET_HELLFIRE
 #ifdef PETROGLYPH_EXAMPLE_MOD
 	&NukeLob,			// BULLET_NUKE_LOB
 #endif //PETROGLYPH_EXAMPLE_MOD

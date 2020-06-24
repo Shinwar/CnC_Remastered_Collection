@@ -351,8 +351,8 @@ static InfantryTypeClass const E4(
 	&FlamethrowerDos[0][0],	// ptr to DO table (above)
 	2,								// Frame of projectile launch.
 	0,								// Frame of projectile launch while prone.
-	70,							// Strength of infantry (in damage points).
-	1,								// Sight range.
+	110,							// Strength of infantry (in damage points).
+	2,								// Sight range.
 	200,							// Cost of infantry (in credits).
 	5,								// Scenario when they first appear.
 	80,10,						// Risk/Reward of this infantry unit.
@@ -364,8 +364,8 @@ static InfantryTypeClass const E4(
 	HOUSEF_MULTI6|
 	HOUSEF_JP|
 	HOUSEF_BAD,					// Who can own this infantry unit.
-	WEAPON_FLAMETHROWER,WEAPON_NONE,
-	MPH_SLOW_ISH
+	WEAPON_FAE,WEAPON_NONE,
+	MPH_MEDIUM
 );
 
 
