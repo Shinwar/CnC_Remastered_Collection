@@ -365,7 +365,7 @@ static InfantryTypeClass const E4(
 	HOUSEF_JP|
 	HOUSEF_BAD,					// Who can own this infantry unit.
 	WEAPON_FAE,WEAPON_NONE,
-	MPH_MEDIUM
+	MPH_MEDIUM_SLOW
 );
 
 

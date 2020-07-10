@@ -618,7 +618,7 @@ static UnitTypeClass const UnitArty(
 	WEAPON_155MM,WEAPON_NONE,
 	ARMOR_STEEL,						// ARMOR:		Armor type
 	SPEED_TRACK,							// MOVE:			Locomotion type.
-	MPH_MEDIUM_SLOW,						// SPEED:		Miles per hour.
+	MPH_MEDIUM,						// SPEED:		Miles per hour.
 	5,											// ROT:			Rate of turn (degrees per tick).
 	0,							// Turret center offset along body centerline.
 	MISSION_HUNT							// ORDERS:		Default order to give new unit.
