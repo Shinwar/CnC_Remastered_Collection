@@ -168,8 +168,8 @@ static AircraftTypeClass const AttackHeli(
 		false,				// Can it be repaired in a repair facility?
 		true,					// Can the player construct or order this unit?
 		true,					// Is there a crew inside?
-	10,						// Number of shots it has (default).
-	250,						// The strength of this unit.
+	15,						// Number of shots it has (default).
+	125,						// The strength of this unit.
 	0,							// The range that it reveals terrain around itself.
 	1200,						// Credit cost to construct.
 	10,						// The scenario this becomes available.
@@ -182,7 +182,7 @@ static AircraftTypeClass const AttackHeli(
 	HOUSEF_MULTI6|
 	HOUSEF_JP|
 	HOUSEF_BAD,				// Who can own this aircraft type.
-	WEAPON_HELLFIRE,WEAPON_NONE,
+	WEAPON_CHAIN_GUN,WEAPON_NONE,
 	ARMOR_STEEL,			// Armor type of this aircraft.
 	MPH_FAST,				// Maximum speed of aircraft.
 	4,							// Rate of turn.

@@ -616,7 +616,6 @@ typedef enum MPHType: unsigned char {
 	MPH_SLOW_ISH=10,
 	MPH_MEDIUM_SLOW=12,
 	MPH_MEDIUM=18,
-	MPH_MEDIUM_ISH=24,
 	MPH_MEDIUM_FAST=30,
 	MPH_MEDIUM_FASTER=35,
 	MPH_FAST=40,
@@ -794,8 +793,6 @@ typedef enum BulletType : char {
 	BULLET_SPREADFIRE,	// Chain gun bullets.
 	BULLET_HEADBUTT,		// Stegosaurus, Triceratops head butt
 	BULLET_TREXBITE,		// Tyrannosaurus Rex's bite - especially bad for infantry
-	BULLET_FAE,
-	BULLET_HELLFIRE,
 
 #ifdef PETROGLYPH_EXAMPLE_MOD
 	BULLET_NUKE_LOB,		// Nuke projectile
@@ -1633,6 +1630,7 @@ typedef enum RadioMessageType : unsigned char {
 	RADIO_KICK,				// "Take this kick, you.. you.."
 	RADIO_PUNCH,			// "Take this punch, you.. you.."
 	RADIO_PREPARE_TO_BOX,//	"Fancy a little fisticuffs, eh?"
+	RADIO_CANCEL, //"Scratch that"
 
 	RADIO_NEED_REPAIR,		// "Are you in need of service depot work?"
 	RADIO_ON_DEPOT,			// "Are you sitting on a service depot?"
@@ -1832,12 +1830,6 @@ typedef enum WeaponType : char {
 	WEAPON_HONEST_JOHN,
 	WEAPON_STEG,
 	WEAPON_TREX,
-	WEAPON_FAE,
-	WEAPON_STINGER,
-	WEAPON_GATT,
-	WEAPON_REDARROW,
-	WEAPON_M270,
-	WEAPON_HELLFIRE,
 
 #ifdef PETROGLYPH_EXAMPLE_MOD
 	WEAPON_NUKE_LOB,

@@ -264,7 +264,7 @@ class FootClass :	public TechnoClass
 		virtual void Fixup_Path(PathType *) {};
 		virtual void Set_Speed(int speed);
 		virtual MoveType Can_Enter_Cell(CELL , FacingType =FACING_NONE) const;
-		int Optimize_Moves(PathType *path, MoveType threshhold);
+		int Optimize_Moves(PathType *path, MoveType threshhold) const;
 		virtual void Override_Mission(MissionType mission, TARGET tarcom, TARGET navcom);
 		virtual bool Restore_Mission(void);
 
@@ -277,11 +277,17 @@ class FootClass :	public TechnoClass
 		CELL Safety_Point(CELL src, CELL dst, int start, int max);
 		int Rescue_Mission(TARGET tarcom);
 
+		virtual BuildingClass* Find_Docking_Bay(StructType b, bool friendly) const override;
+
+		void Set_Attack_Move(bool value) { IsAttackMoving = value; }
+		bool Is_Attack_Moving() const { return IsAttackMoving; }
 	private:
-		int Passable_Cell(CELL cell, FacingType face, int threat, MoveType threshhold);
+		int Passable_Cell(CELL cell, FacingType face, int threat, MoveType threshhold) const;
 		PathType * Find_Path(CELL dest, FacingType *final_moves, int maxlen, MoveType threshhold);
+		int Find_Path_AStar(PathType* const resultPath, const CELL source, CELL dest, const int maxLen, const MoveType threshhold, const int threat) const;
+		CELL Find_Passable_Position_Near(const CELL target, const int maxRadius, const MoveType threshhold, const int threat) const;
 		void Debug_Draw_Map(char *txt, CELL start, CELL dest, bool pause);
-		void Debug_Draw_Path(PathType *path);
+		void Debug_Draw_Path(PathType *path) const;
 		bool Follow_Edge(CELL start, CELL target, PathType *path, FacingType search, FacingType olddir, int threat, int threat_stage, int max_cells, MoveType threshhold);
 		bool Register_Cell(PathType *path, CELL cell, FacingType dir, int cost, MoveType threshhold);
 		bool Unravel_Loop(PathType *path, CELL &cell, FacingType &dir, int sx, int sy, int dx, int dy, MoveType threshhold);
@@ -295,10 +301,16 @@ class FootClass :	public TechnoClass
 		*/
 		COORDINATE HeadToCoord;
 
+		/* 16/06/2020 cfenunter
+		** I've stolen a byte of the save load padding for the attack moving flag.
+		** We are now down to 15
+		*/
+		bool       IsAttackMoving : 1;
+
 		/*
 		** Some additional padding in case we need to add data to the class and maintain backwards compatibility for save/load
 		*/
-		unsigned char SaveLoadPadding[16];
+		unsigned char SaveLoadPadding[15];
 };
 
 #endif

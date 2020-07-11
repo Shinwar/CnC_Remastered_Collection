@@ -76,6 +76,25 @@ extern bool Debug_Force_Crash;
 
 extern void const *WarFactoryOverlay;
 
+struct CFEPatchConfig
+{
+	bool EnableASPathing = false;
+	bool EnableOOMRepair = false;
+	bool EnableRallyPoints = false;
+	bool EnableHarvyQueueJump = false;
+	bool EnableHarvySelfRepair = false;
+	bool DisableCommandoAirstrikes = false;
+	bool WallsAlwaysHaveFullCost = true;
+	bool EnableAttackMove = false;
+	bool EnableCommandoGuard = false;
+	bool EnableSafeSabotage = false;
+	int  BuildingGap = 2;
+	int  HarvyQueueJumpCutoff = 3;
+	int  TibGrowthScale = 1;
+	int  WallBuildLength = 5;
+};
+
+extern CFEPatchConfig ActiveCFEPatchConfig;
 
 /*
 **	Dynamic global variables (these change or are initialized at run time).
@@ -353,6 +372,7 @@ extern unsigned char const					Pixel2Lepton[24];
 extern COORDINATE const 							StoppingCoordAbs[5];
 extern CELL const 							AdjacentCell[FACING_COUNT];
 extern COORDINATE const 							AdjacentCoord[FACING_COUNT];
+extern const FacingType						FacingCardinals[4];
 
 extern int SoundOn;
 //extern GraphicBufferClass	SeenPage;

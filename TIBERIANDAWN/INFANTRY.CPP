@@ -1054,16 +1054,6 @@ void InfantryClass::AI(void)
 		Commence();
 	}
 
-	if (*this == INFANTRY_E4 && (Frame % 16) == 0 && Health_Ratio() < 0x0100) {
-		Strength++;
-		Mark(MARK_CHANGE);
-	}
-
-	if (*this == INFANTRY_RAMBO && (Frame % 16) == 0 && Health_Ratio() < 0x00C0) {
-		Strength++;
-		Mark(MARK_CHANGE);
-	}
-
 	/*
 	**	After a time, the infantry will gain courage.
 	*/
@@ -2528,7 +2518,7 @@ TARGET InfantryClass::Greatest_Threat(ThreatType threat) const
 		**	unless specifically in hunt mode.
 		*/
 		case WEAPON_RIFLE:
-			if (House->IsHuman && (Mission == MISSION_GUARD || Mission == MISSION_GUARD_AREA)) {
+			if (!ActiveCFEPatchConfig.EnableCommandoGuard && House->IsHuman && (Mission == MISSION_GUARD || Mission == MISSION_GUARD_AREA)) {
 				return(TARGET_NONE);
 			}
 			return(TechnoClass::Greatest_Threat(threat | THREAT_INFANTRY|THREAT_BUILDINGS));

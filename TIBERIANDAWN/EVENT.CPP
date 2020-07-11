@@ -600,6 +600,13 @@ CCDebugString ("C&C95 - Primary building packet received\n");
 						if (((FootClass *)techno)->Team) {
 							((FootClass *)techno)->Team->Remove((FootClass *)techno);
 						}
+
+						if (Data.MegaMission.Mission == MISSION_MOVE && CFE_Patch_Should_Attack_Move(Data.MegaMission.Target, Data.MegaMission.Whom))
+						{
+							object = nullptr;
+							Data.MegaMission.Target = TARGET_NONE;
+							((FootClass*)techno)->Set_Attack_Move(true);
+						}
 						break;
 				}
 
@@ -650,6 +657,9 @@ CCDebugString ("C&C95 - Primary building packet received\n");
 				techno->Assign_Destination(TARGET_NONE);
 				techno->Assign_Target(TARGET_NONE);
 				techno->Enter_Idle_Mode();
+			}
+			else if (techno && CFE_Patch_Can_Have_Rally_Point(*techno)) {
+				techno->Assign_Target(TARGET_NONE);
 			}
 			break;
 
@@ -770,6 +780,21 @@ CCDebugString (flip);
 			}
 			break;
 
+		//CFE Patch events
+		case SET_RALLY:
+			if (BuildingClass* const building = As_Building(Data.NavCom.Whom))
+			{
+				if (building->RallyPoint != Data.NavCom.Where)
+				{
+					if (building->As_Target() != Data.NavCom.Where)
+						building->RallyPoint = Data.NavCom.Where;
+					else
+						building->RallyPoint = TARGET_NONE;
+
+					Map.Flag_To_Redraw(true);
+				}
+			}
+			break;
 		/*
 		**	Default: do nothing.
 		*/

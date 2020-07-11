@@ -627,6 +627,72 @@
     <ClInclude Include="RULES.H">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="B64PIPE.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="B64STRAW.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BASE64.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BUFF.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFEDEBUG.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CRC.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FIXED.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INI.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INT.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LISTNODE.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MP.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PIPE.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PK.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RANDOM.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RANGEWRAPPER.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="READLINE.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RNDSTRAW.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SEARCH.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SHA.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="STRAW.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XPIPE.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XSTRAW.H">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AADATA.CPP">
@@ -822,9 +888,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="INFANTRY.CPP">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="INI.CPP">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="INIT.CPP">
@@ -1202,8 +1265,73 @@
     <ClCompile Include="TURRET.CPP">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DLLInterfaceEditor.cpp" />
     <ClCompile Include="RULES.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="B64PIPE.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="B64STRAW.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BASE64.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BUFF.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFEPATCHQUERY.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFEUTIL.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CRC.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DLLInterfaceEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FIXED.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INIOLD.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INT.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MP.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PIPE.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PK.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RANDOM.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="READLINE.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RNDSTRAW.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STRAW.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XPIPE.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XSTRAW.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RAINI.CPP">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -25,8 +25,7 @@
 ** 
 */
 
-
-
+#include <algorithm>
 #include <stdio.h>
 
 #include	"function.h"
@@ -1697,6 +1696,7 @@ extern "C" __declspec(dllexport) bool __cdecl CNC_Save_Load(bool save, const cha
 		result = Load_Game(file_path_and_name);
 
 		DLLExportClass::Set_Player_Context(DLLExportClass::GlyphxPlayerIDs[0], true);
+		DLLExportClass::Recalculate_Placement_Distances();
 		Set_Logic_Page(SeenBuff);
 		VisiblePage.Clear();
 		Map.Flag_To_Redraw(true);
@@ -4151,7 +4151,7 @@ bool DLLExportClass::Get_Sidebar_State(uint64 player_id, unsigned char *buffer_i
 							if (sidebar_entry.Completed && sidebar_entry.Type == BUILDING_TYPE) {
 								if (tech) {
 									BuildingTypeClass *building_type = (BuildingTypeClass*)tech;
-									short const *occupy_list = building_type->Occupy_List(true);
+									short const* occupy_list = building_type->Occupy_List(true);
 									if (occupy_list) {
 										while (*occupy_list != REFRESH_EOL && sidebar_entry.PlacementListLength < MAX_OCCUPY_CELLS) {
 											sidebar_entry.PlacementList[sidebar_entry.PlacementListLength] = *occupy_list;
@@ -4378,18 +4378,29 @@ void DLLExportClass::Calculate_Placement_Distances(BuildingTypeClass* placement_
 	}
 
 	memset(placement_distance, 255U, MAP_CELL_TOTAL);
+
+	const int buildingGap = ActiveCFEPatchConfig.BuildingGap;
+
 	for (int y = 0; y < map_cell_height; y++) {
 		for (int x = 0; x < map_cell_width; x++) {
 			CELL cell = (CELL)map_cell_x + x + ((map_cell_y + y) << 6);
 			BuildingClass* base = (BuildingClass*)Map[cell].Cell_Find_Object(RTTI_BUILDING);
 			if ((base && base->House->Class->House == PlayerPtr->Class->House) || (Map[cell].Owner == PlayerPtr->Class->House)) {
 				placement_distance[cell] = 0U;
-				for (FacingType facing = FACING_N; facing < FACING_COUNT; facing++) {
-					CELL adjcell = Adjacent_Cell(cell, facing);
-					if (Map.In_Radar(adjcell)) {
-						placement_distance[adjcell] = min(placement_distance[adjcell], 1U);
+				
+				/* 14/06/2020 cfehunter
+				** placement_distances are really only a boolean at this point.
+				** even the base game only flood fills adjacent tiles, so just set all the valid tiles to 0
+				*/
+				for (int adjY = y - buildingGap, adjMaxY = y + buildingGap; adjY <= adjMaxY; ++adjY) {
+					for (int adjX = x - buildingGap, adjMaxX = x + buildingGap; adjX <= adjMaxX; ++adjX) {
+						//XY_CELL is incompatible with this because x/y do not take the map offset into account
+						const CELL adjCell = map_cell_x + adjX + ((map_cell_y + adjY) << 6);
+						if (Map.In_Radar(adjCell))
+							placement_distance[adjCell] = 0U;
 					}
 				}
+
 			}
 		}
 	}
@@ -4500,20 +4511,18 @@ bool DLLExportClass::Passes_Proximity_Check(CELL cell_in, BuildingTypeClass *pla
 	*/
 	short const *occupy_list = placement_type->Occupy_List(true);
 	
+	bool proximityPass = false;
 	while (*occupy_list != REFRESH_EOL) {
 
 		CELL center_cell = cell_in + *occupy_list++;
 
-		if (!Map.In_Radar(center_cell)) {
+		if (!Map.In_Radar(center_cell))
 			return false;
-		}
 
-		if (placement_distance[center_cell] <= 1U) {
-			return true;
-		}
+		proximityPass = proximityPass || placement_distance[center_cell] <= ActiveCFEPatchConfig.BuildingGap;
 	}
 
-	return false;
+	return proximityPass;
 }
 
 
@@ -5835,7 +5844,7 @@ void DLLExportClass::Cell_Class_Draw_It(CNCDynamicMapStruct *dynamic_map, int &e
 	*/
 	if (cell_ptr->Smudge != SMUDGE_NONE) {
 		//SmudgeTypeClass::As_Reference(Smudge).Draw_It(x, y, SmudgeData);
-		
+
 		const SmudgeTypeClass &smudge_type = SmudgeTypeClass::As_Reference(cell_ptr->Smudge);
 
 		if (smudge_type.Get_Image_Data() != NULL) {
@@ -5941,8 +5950,35 @@ void DLLExportClass::Cell_Class_Draw_It(CNCDynamicMapStruct *dynamic_map, int &e
 		}
 
 	}
-		  
-}			  
+
+	/*cfehunter 12/06/2020
+	*Render wall placement markers.
+	*Special thanks to pchote for this, getting the cursor rendering in classic was easy
+	*getting it to render in glyphX has been difficult
+	*/
+	if (cell_ptr->IsCursorHere && Map.PendingObject && CFE_Patch_Is_Wall(*Map.PendingObject) && Map.ZoneCell != cell_ptr->Cell_Number()) {
+		CNCDynamicMapEntryStruct& cursorEntry = dynamic_map->Entries[entry_index++];
+
+		strncpy(cursorEntry.AssetName, cell_ptr->Is_Generally_Clear() ? "PLACEMENT_EXTRA" : "PLACEMENT_BAD", CNC_OBJECT_ASSET_NAME_LENGTH);
+		cursorEntry.AssetName[CNC_OBJECT_ASSET_NAME_LENGTH - 1] = 0;
+		cursorEntry.Type = -1;
+		cursorEntry.Owner = (char)cell_ptr->Owner;
+		cursorEntry.DrawFlags = SHAPE_CENTER | SHAPE_GHOST | SHAPE_COLOR;
+		cursorEntry.PositionX = xpixel + (ICON_PIXEL_W / 2);
+		cursorEntry.PositionY = ypixel + (ICON_PIXEL_H / 2);
+		cursorEntry.Width = 24;
+		cursorEntry.Height = 24;
+		cursorEntry.CellX = Cell_X(cell);
+		cursorEntry.CellY = Cell_Y(cell);
+		cursorEntry.ShapeIndex = 0;
+		cursorEntry.IsSmudge = true;
+		cursorEntry.IsOverlay = false;
+		cursorEntry.IsResource = false;
+		cursorEntry.IsSellable = false;
+		cursorEntry.IsTheaterShape = false;
+		cursorEntry.IsFlag = false;
+	}
+}
 
 
 
